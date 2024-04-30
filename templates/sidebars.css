@@ -1,0 +1,93 @@
+body {
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  background-color: rgb(239, 238, 238);
+}
+
+html {
+  height: -webkit-fill-available;
+}
+
+main {
+  height: 100vh;
+  height: -webkit-fill-available;
+  max-height: 100vh;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+.custom-container {
+  height: 12rem;
+  width: 16rem;
+  box-shadow: inset;
+  border-radius: 10px; /* Bordes redondeados */
+  cursor: pointer;
+  display: flex; /* Usamos flexbox */
+  justify-content: center; /* Centramos horizontalmente */
+  align-items: center;
+  background-color: white; /* Cursor de puntero */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra */
+}
+.custom-container.selected {
+  border-color: #16bfe0;
+  background-color: aliceblue; /* Cambio de color del borde al seleccionar */
+}
+
+.rounded-button {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  line-height: 50px; /* Ajusta este valor según sea necesario */
+  font-size: 18px; /* Ajusta el tamaño de fuente según sea necesario */
+  display: inline-block;
+  margin: 5px;
+  cursor: pointer; /* Añade un cursor de puntero para indicar que es interactivo */
+}
+
+.dropdown-toggle { outline: 0; }
+
+.btn-toggle {
+  padding: .25rem .5rem;
+  font-weight: 600;
+  color: var(--bs-emphasis-color);
+  background-color: transparent;
+}
+.btn-toggle:hover,
+.btn-toggle:focus {
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+  background-color: var(--bs-tertiary-bg);
+}
+
+.btn-toggle::before {
+  width: 1.25em;
+  line-height: 0;
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%280,0,0,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+  transition: transform .35s ease;
+  transform-origin: .5em 50%;
+}
+
+[data-bs-theme="dark"] .btn-toggle::before {
+  content: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='rgba%28255,255,255,.5%29' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M5 14l6-6-6-6'/%3e%3c/svg%3e");
+}
+
+.btn-toggle[aria-expanded="true"] {
+  color: rgba(var(--bs-emphasis-color-rgb), .85);
+}
+.btn-toggle[aria-expanded="true"]::before {
+  transform: rotate(90deg);
+}
+
+.btn-toggle-nav a {
+  padding: .1875rem .5rem;
+  margin-top: .125rem;
+  margin-left: 1.25rem;
+}
+.btn-toggle-nav a:hover,
+.btn-toggle-nav a:focus {
+  background-color: var(--bs-tertiary-bg);
+}
+
+.scrollarea {
+  overflow-y: auto;
+}
