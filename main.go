@@ -6,8 +6,8 @@ import (
 	"html/template"
 	"net/http"
 	"os"
-	"strings"
 	"sort"
+	"strings"
 
 	funcs "github.com/derly/TallerGoWeb/funciones"
 	"github.com/derly/TallerGoWeb/modelos"
@@ -15,7 +15,7 @@ import (
 
 func Index(w http.ResponseWriter, r *http.Request) {
 
-	template, err := template.ParseFiles("templates/index.html")
+	template, err := template.ParseFiles("templates/ListarEstudiantes.html")
 	if err != nil {
 		fmt.Fprint(w, "<h1> Pagina no encontrada <h1>")
 		panic(err)
@@ -50,113 +50,111 @@ func PeorEstudiante(w http.ResponseWriter, r *http.Request) {
 }
 
 func Top10MejoresPromedios(w http.ResponseWriter, r *http.Request) {
-    curso := r.URL.Query().Get("curso") // Obtiene el curso desde el parámetro de la URL
+	curso := r.URL.Query().Get("curso") // Obtiene el curso desde el parámetro de la URL
 
 	if curso == "" {
-        curso = "Algebra lineal" // Valor por defecto
-    }
+		curso = "Algebra lineal" // Valor por defecto
+	}
 
-    // Carga de datos de estudiantes
-    var data []modelos.Estudiante = CargaDatos()
-    var estudiantesFiltrados []modelos.Estudiante
+	// Carga de datos de estudiantes
+	var data []modelos.Estudiante = CargaDatos()
+	var estudiantesFiltrados []modelos.Estudiante
 
-    // Filtrar estudiantes que están matriculados en el curso seleccionado
-    for _, estudiante := range data {
-        for _, c := range estudiante.Cursos {
-            if c.Curso == curso {
-                estudiante.Cursos = []modelos.Curso{c} // Reten solo el curso relevante
-                estudiantesFiltrados = append(estudiantesFiltrados, estudiante)
-                break
-            }
-        }
-    }
+	// Filtrar estudiantes que están matriculados en el curso seleccionado
+	for _, estudiante := range data {
+		for _, c := range estudiante.Cursos {
+			if c.Curso == curso {
+				estudiante.Cursos = []modelos.Curso{c} // Reten solo el curso relevante
+				estudiantesFiltrados = append(estudiantesFiltrados, estudiante)
+				break
+			}
+		}
+	}
 
-    // Ordenar los estudiantes filtrados por nota, asegurando que se usa la nota del curso relevante
-    sort.Slice(estudiantesFiltrados, func(i, j int) bool {
-        return estudiantesFiltrados[i].Cursos[0].Nota > estudiantesFiltrados[j].Cursos[0].Nota
-    })
+	// Ordenar los estudiantes filtrados por nota, asegurando que se usa la nota del curso relevante
+	sort.Slice(estudiantesFiltrados, func(i, j int) bool {
+		return estudiantesFiltrados[i].Cursos[0].Nota > estudiantesFiltrados[j].Cursos[0].Nota
+	})
 
-    // Si hay más de 10 estudiantes, recortar el slice a los 10 primeros
-    if len(estudiantesFiltrados) > 10 {
-        estudiantesFiltrados = estudiantesFiltrados[:10]
-    }
+	// Si hay más de 10 estudiantes, recortar el slice a los 10 primeros
+	if len(estudiantesFiltrados) > 10 {
+		estudiantesFiltrados = estudiantesFiltrados[:10]
+	}
 
-    // Preparar y ejecutar el template con los estudiantes filtrados
-    template, err := template.ParseFiles("templates/top10Mejor.html")
-    if err != nil {
-        http.Error(w, "Página no encontrada", http.StatusNotFound)
-        return
-    }
-    template.Execute(w, estudiantesFiltrados)
+	// Preparar y ejecutar el template con los estudiantes filtrados
+	template, err := template.ParseFiles("templates/top10Mejor.html")
+	if err != nil {
+		http.Error(w, "Página no encontrada", http.StatusNotFound)
+		return
+	}
+	template.Execute(w, estudiantesFiltrados)
 }
 
 func Top10PeoresPromedios(w http.ResponseWriter, r *http.Request) {
-    curso := r.URL.Query().Get("curso") // Obtiene el curso desde el parámetro de la URL
+	curso := r.URL.Query().Get("curso") // Obtiene el curso desde el parámetro de la URL
 
 	if curso == "" {
-        curso = "Algebra lineal" // Valor por defecto
-    }
+		curso = "Algebra lineal" // Valor por defecto
+	}
 
-    var data []modelos.Estudiante = CargaDatos()
-    var estudiantesFiltrados []modelos.Estudiante
+	var data []modelos.Estudiante = CargaDatos()
+	var estudiantesFiltrados []modelos.Estudiante
 
-    // Filtrar estudiantes que están matriculados en el curso seleccionado
-    for _, estudiante := range data {
-        for _, c := range estudiante.Cursos {
-            if c.Curso == curso {
-                estudiante.Cursos = []modelos.Curso{c} // Reten solo el curso relevante
-                estudiantesFiltrados = append(estudiantesFiltrados, estudiante)
-                break
-            }
-        }
-    }
+	// Filtrar estudiantes que están matriculados en el curso seleccionado
+	for _, estudiante := range data {
+		for _, c := range estudiante.Cursos {
+			if c.Curso == curso {
+				estudiante.Cursos = []modelos.Curso{c} // Reten solo el curso relevante
+				estudiantesFiltrados = append(estudiantesFiltrados, estudiante)
+				break
+			}
+		}
+	}
 
-    // Ordenar los estudiantes filtrados por nota, de menor a mayor
-    sort.Slice(estudiantesFiltrados, func(i, j int) bool {
-        return estudiantesFiltrados[i].Cursos[0].Nota < estudiantesFiltrados[j].Cursos[0].Nota
-    })
+	// Ordenar los estudiantes filtrados por nota, de menor a mayor
+	sort.Slice(estudiantesFiltrados, func(i, j int) bool {
+		return estudiantesFiltrados[i].Cursos[0].Nota < estudiantesFiltrados[j].Cursos[0].Nota
+	})
 
-    // Si hay más de 10 estudiantes, recortar el slice a los 10 primeros
-    if len(estudiantesFiltrados) > 10 {
-        estudiantesFiltrados = estudiantesFiltrados[:10]
-    }
+	// Si hay más de 10 estudiantes, recortar el slice a los 10 primeros
+	if len(estudiantesFiltrados) > 10 {
+		estudiantesFiltrados = estudiantesFiltrados[:10]
+	}
 
-    // Preparar y ejecutar el template con los estudiantes filtrados
-    template, err := template.ParseFiles("templates/top10Peor.html")
-    if err != nil {
-        http.Error(w, "Página no encontrada", http.StatusNotFound)
-        return
-    }
-    template.Execute(w, estudiantesFiltrados)
+	// Preparar y ejecutar el template con los estudiantes filtrados
+	template, err := template.ParseFiles("templates/top10Peor.html")
+	if err != nil {
+		http.Error(w, "Página no encontrada", http.StatusNotFound)
+		return
+	}
+	template.Execute(w, estudiantesFiltrados)
 }
-
 
 func EstudiantesMatriculados2022(w http.ResponseWriter, r *http.Request) {
-    var data []modelos.Estudiante = CargaDatos()
-    
-    // Obtener los parámetros de query
-    nombre := r.URL.Query().Get("nombre")
-    apellido := r.URL.Query().Get("apellido")
+	var data []modelos.Estudiante = CargaDatos()
 
-    // Filtrar estudiantes por nombre y apellido si se proporcionan
-    var estudiantesFiltrados []modelos.Estudiante
-    for _, estudiante := range data {
-        if estudiante.Matriculado[:4] == "2022" &&
-           (nombre == "" || strings.Contains(strings.ToLower(estudiante.Nombre), strings.ToLower(nombre))) &&
-           (apellido == "" || strings.Contains(strings.ToLower(estudiante.Apellido), strings.ToLower(apellido))) {
-            estudiantesFiltrados = append(estudiantesFiltrados, estudiante)
-        }
-    }
+	// Obtener los parámetros de query
+	nombre := r.URL.Query().Get("nombre")
+	apellido := r.URL.Query().Get("apellido")
 
-    template, err := template.ParseFiles("templates/estudiantes2022.html")
-    if err != nil {
-        fmt.Fprint(w, "<h1> Página no encontrada <h1>")
-        panic(err)
-    } else {
-        template.Execute(w, estudiantesFiltrados)
-    }
+	// Filtrar estudiantes por nombre y apellido si se proporcionan
+	var estudiantesFiltrados []modelos.Estudiante
+	for _, estudiante := range data {
+		if estudiante.Matriculado[:4] == "2022" &&
+			(nombre == "" || strings.Contains(strings.ToLower(estudiante.Nombre), strings.ToLower(nombre))) &&
+			(apellido == "" || strings.Contains(strings.ToLower(estudiante.Apellido), strings.ToLower(apellido))) {
+			estudiantesFiltrados = append(estudiantesFiltrados, estudiante)
+		}
+	}
+
+	template, err := template.ParseFiles("templates/estudiantes2022.html")
+	if err != nil {
+		fmt.Fprint(w, "<h1> Página no encontrada <h1>")
+		panic(err)
+	} else {
+		template.Execute(w, estudiantesFiltrados)
+	}
 }
-
 
 func EstudianteMasculinoMayor(w http.ResponseWriter, r *http.Request) {
 	var data []modelos.Estudiante = CargaDatos()
