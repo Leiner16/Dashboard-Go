@@ -17,8 +17,8 @@ main {
 }
 
 .custom-container {
-  height: 12rem;
-  width: 16rem;
+  height: 16rem;
+  width: 20rem;
   box-shadow: inset;
   border-radius: 10px; /* Bordes redondeados */
   cursor: pointer;
@@ -28,7 +28,7 @@ main {
   background-color: white; /* Cursor de puntero */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Sombra */
 }
-.custom-container.selected {
+.card.selected {
   border-color: #16bfe0;
   background-color: aliceblue; /* Cambio de color del borde al seleccionar */
 }
