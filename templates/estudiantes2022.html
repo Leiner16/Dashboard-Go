@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://cdn.icon-icons.com/icons2/2699/PNG/512/golang_logo_icon_171073.png" type="image/png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossOrigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossOrigin="anonymous"></script>
+    <title>Go Web</title>
+</head>
+<body>
+
+<header>
+    <div>
+        <div>
+            <nav class="navbar navbar-expand-lg bg-body-tertiary">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Go Web</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">Home</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Promedio
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/mejor-promedio">Mejor Promedio</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/peor-promedio">Peor Promedio</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/promedio-rango-edad">Promedio Por Rango Edad</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Top 10
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/top10-mejor">Top 10 Mejores Notas</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/top10-peores">Top 10 Peores Notas</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Genero
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/estudiante-masculino-mayor">Masculino mayor edad</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="/estudiante-femenino-mayor">Femenino mayor edad</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/estadisticas-cursos">Estadisticas por Curso</a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    Matriculados
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="/matriculados/estudiantes-2022">Año 2022</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+    <br>
+    <header class="bg-success text-white text-center py-4">
+        <h1>Estudiantes Matriculados 2022</h1>
+    </header>
+    <br>
+    <br>
+    <div class="row justify-content-center">
+
+         
+
+    <table class="table table-striped w-50">
+        <thead>
+        <tr>
+            <form method="get" class="mb-4" onchange="this.submit()">
+                <th>Id</th>
+                    <th class="col-auto">
+                        <input type="text" id="nombre" name="nombre" class="form-control" placeholder="Ingrese nombre">
+                    </th>
+                    <th class="col-auto">
+                        <input type="text" id="apellido" name="apellido" class="form-control" placeholder="Ingrese apellido">
+                    </th>
+                    <button type="submit" class="btn btn-primary d-none">Filtrar</button>
+                <th>Edad</th>
+            </form> 
+        </tr>
+        </thead>
+        <tbody class="table-group-divider">
+        {{range .}}
+        <tr>
+            <th scope="row">{{.Index}}</th>
+            <td>{{.Nombre}}</td>
+            <td>{{.Apellido}}</td>
+            <td>{{.Edad}}</td>
+        </tr>
+        {{end}}
+        </tbody>
+    </table>
+    </div>
+</div>
+</body>
+<footer class="bg-dark text-white text-center py-2 mt-4">
+    &copy; 2024 Go Web
+</footer>
+</html>
