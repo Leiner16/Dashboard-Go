@@ -235,13 +235,24 @@ func CargaDatos() []modelos.Estudiante {
 	}
 	return data
 }
+func Listar(w http.ResponseWriter, r *http.Request) {
+	var data []modelos.Estudiante = CargaDatos()
+
+	template, err := template.ParseFiles("templates/Listar.html")
+	if err != nil {
+		fmt.Fprint(w, "<h1> Página no encontrada </h1>")
+		panic(err)
+	} else {
+		template.Execute(w, data) // Pasamos la lista completa de estudiantes a la plantilla
+	}
+}
 
 func main() {
 
 	http.HandleFunc("/", Index)
 	http.HandleFunc("/mejor-promedio", MejorEstudiante)
 	http.HandleFunc("/peor-promedio", PeorEstudiante)
-
+	http.HandleFunc("/listar", Listar)
 	http.HandleFunc("/top10-mejor", Top10MejoresPromedios)
 	http.HandleFunc("/top10-peores", Top10PeoresPromedios)
 
