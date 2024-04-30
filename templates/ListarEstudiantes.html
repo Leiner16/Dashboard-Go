@@ -299,31 +299,34 @@
 
       <div
         class="container"
-        style="margin-left: 6%; margin-top: 2%; margin-right: 3%"
+        style="margin-left: 6%;  margin-right: 3%"
       >
-        <div class="row justify-content-start">
+      <div style="margin-top: 5%;">
+        <h1 class="text-align-center ">Vista principal</h1>
+      </div>
+        <div class="row justify-content-start" style="margin-top: 4%;">
           <div class="col-12">
             <div class="row">
             
               <div class="col-md-4">
-                <a href="Promedio por cursos" disabled>
+                <a>
                   <div class="card bg-white mb-3" style="max-width: 20rem; height: 16rem;">
                     <div class="card-header "><h5 class="card-"> Promedio por cursos</h5></div>
                     <div class="card-body">
-                      <div class="row">
+                      <div class="row" style="margin-left: 20px;">
                         <div class="col-md-6 mt-2">
-                          <button class="btn btn-primary rounded-circle" style="width: 80px; height: 80px;  text-align: center;">1</button>
+                          <button class="btn btn-primary rounded-circle" style="width: 85px; height: 80px;  text-align: center;">Álgebra 2.5</button>
                         </div>
                         <div class="col-md-6 mt-2">
-                          <button class="btn btn-primary rounded-circle text-dark" style="background-color: yellow; width: 80px; height: 80px;  text-align: center;">2</button>
+                          <button class="btn rounded-circle text-dark" style="background-color: rgb(234, 0, 255); width: 80px; height: 80px;  text-align: center;">Cálculo 2.6</button>
                         </div>
                       </div>
-                      <div class="row">
+                      <div class="row" style="margin-left: 20px;">
                         <div class="col-md-6 mt-2">
-                          <button class="btn btn-warning rounded-circle" style=" width: 80px; height: 80px;  text-align: center;">3</button>
+                          <button class="btn btn-warning rounded-circle" style=" width: 80px; height: 80px;  text-align: center;">POO 2.5</button>
                         </div>
                         <div class="col-md-6 mt-2">
-                          <button class="btn btn-info rounded-circle" style=" width: 80px; height: 80px;  text-align: center; color: white;">4</button>
+                          <button class="btn btn-info rounded-circle" style=" width: 80px; height: 80px;  text-align: center; color: white;">CTD 2.3</button>
                         </div>
                       </div>
                       
@@ -333,9 +336,9 @@
                 </a>
               </div>
               <div class="col-md-4">
-                <a href="MatriculadosAño" disabled>
+                <a>
                   <div class="card bg-white mb-3" style="max-width: 20rem; height: 16rem;">
-                    <div class="card-header "><h5 class="card-"> Matriculado</h5></div>
+                    <div class="card-header "><h5 class="card-"> Matriculados en lista</h5></div>
                     <div class="card-body">
                       <div class="row" style="width: 280px; height: 160px;">
                       <canvas id="myPieChart" ></canvas>
@@ -345,7 +348,7 @@
                 </a>
               </div>
               <div class="col-md-4">
-                <a href="MatriculadosAño" disabled>
+                <a>
                   <div class="card bg-white mb-3" style="max-width: 20rem; height: 16rem;">
                     <div class="card-header "><h5 class="card-"> Matriculados por año</h5></div>
                     <div class="card-body">
@@ -355,14 +358,14 @@
                 </a>
               </div>
             </div>
-            <div class="row mt-3">
+            <div class="row mt-5">
              
-              <div class="col-md-4">
-                <a href="Promedio por cursos" disabled>
+              <div class="col-md-4 " disabled>
+                <a >
                   <div class="card bg-white mb-3" style="max-width: 20rem; height: 16rem;">
                     <div class="card-header "><h5 class="card-"> Estudiantes por curso</h5></div>
                     <div class="card-body">
-                      <div class="row">
+                      <div class="row" style="margin-left: 20px;">
                         <div class="col-md-6 mt-2">
                           <button class="btn btn-dark rounded-circle" style="width: 80px; height: 80px;  text-align: center;">12</button>
                         </div>
@@ -370,7 +373,7 @@
                           <button class="btn btn-success rounded-circle text-dark" style=" width: 80px; height: 80px;  text-align: center;">32</button>
                         </div>
                       </div>
-                      <div class="row">
+                      <div class="row" style="margin-left: 20px;">
                         <div class="col-md-6 mt-2">
                           <button class="btn btn-primary rounded-circle" style=" width: 80px; height: 80px;  text-align: center;">33</button>
                         </div>
@@ -436,9 +439,9 @@
     <script>
       // Datos para la gráfica
       var data = {
-        labels: ['Grupo A', 'Grupo B'],
+        labels: ['Si', 'No'],
         datasets: [{
-          data: [40, 30], // Aquí coloca los datos reales
+          data: [199, 0], // Aquí coloca los datos reales
           backgroundColor: [ '#36a2eb', '#ffce56'] // Colores para cada sección
           
         }]
